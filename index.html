@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+    <title>Mi primer mapa</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 900px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id='map'>
+
+    </div>
+
+    <script>
+        //L.tilelayer sirve para llamar capas de otro servidor
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+                + 'contributors',
+            maxZoom: 18
+        });
+
+        //el 'map' es el id del div donde se mostrara el mapa
+        var map = L.map('map', {
+            //coordenadas decimanles donde se abrira el mapa
+            center: [1.61804300, -75.60607800],
+            //zona bastante grande
+            zoom: 15,
+            //llamo la capa base 
+            layers: osm,
+            //para con la ruedita del maouse acercarse o alejarse
+            scrollWheelZoom: false,
+        });
+
+
+
+        //Marcador universidad de la Amazonia
+        var markerUniversidad = L.marker([1.6204211498940198, -75.60437247747707], {
+            draggable: true,
+            title: 'Toca aquí'
+        }).addTo(map)
+            .bindPopup('Universidad de la Amazonia')
+            .openPopup();
+
+
+        //Marcador Alcaldia de florencia
+        var markerAlcaldia = L.marker([1.6148816129970582, -75.613815783822], {
+            draggable: true,
+            title: 'Toca aquí'
+        }).addTo(map)
+            .bindPopup('Alcaldia de Florecia')
+            .openPopup();
+
+        //Añadir un círculo con 500 metros a la redonda
+        var circle = L.circle([1.6148816129970582, -75.613815783822], 500, {
+            color: 'green',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map);
+
+        //Marcador Plaza Santander
+        var markerPsantander = L.marker([1.6149520350146271, -75.61316311238157], {
+            draggable: true,
+            title: 'Toca aquí'
+        }).addTo(map)
+            .bindPopup('Alcaldia de Florecia')
+            .openPopup();
+
+
+        //poligono de plaza santander 
+        var poligoPsantander = L.polygon([
+            [1.6151799052345979, -75.61370152402674],
+            [1.615400031534925, -75.61303619722725],
+            [1.6146990618897972, -75.61282379241966],
+            [1.6145117202973451, -75.61350161361878]
+        ]).addTo(map)
+            .bindPopup('Mercaolid');
+
+
+        //Añadir una línea, aqui importa el orden en el latlngs
+        var point1 = new L.LatLng(1.6074540991712323, -75.61062069289024);
+        var point2 = new L.LatLng(1.6074299687901124, -75.6101727640016);
+        var point3 = new L.LatLng(1.6079420690396964, -75.61019690388183);
+        var point4 = new L.LatLng(1.6086041413057504, -75.60986110454647);
+        var point5 = new L.LatLng(1.6086979062561337, -75.60943117909281);
+        var point6 = new L.LatLng(1.6078238845403798, -75.60799356735392);
+        var point7 = new L.LatLng(1.609686593328259, -75.60671917601006);
+        var point8 = new L.LatLng(1.609686593328259, -75.60671917601006);
+        var point9 = new L.LatLng(1.609686593328259, -75.60671917601006);
+        var point10 = new L.LatLng(1.6086273300921172, -75.60468613944147);
+
+        var point11 = new L.LatLng(1.6084453798291278, -75.60457634840198);
+        var point12 = new L.LatLng(1.608494477520733, -75.60438276946391);
+        var point13 = new L.LatLng(1.608682203977769, -75.60437988022603);
+        var point14 = new L.LatLng(1.6102114634034037, -75.6041418900568);
+        var point15 = new L.LatLng(1.6126206658800046, -75.60607327211173);
+        var point16 = new L.LatLng(1.613223740627307, -75.60612741565171);
+        var point17 = new L.LatLng(1.6134402289485172, -75.60601139377533);
+
+        var point18 = new L.LatLng(1.6152567332054806, -75.60425612509904);
+        var point19 = new L.LatLng(1.6156133734552172, -75.604306199772111);
+        var point20 = new L.LatLng(1.6188874078806192, -75.60646242084478);
+        var point21 = new L.LatLng(1.6201577460749614, -75.60522067831099);
+
+
+
+
+        var latlngs = [point1, point2, point3, point4, point5, point6, point7,
+            point8, point9, point10, point11, point12, point13, point14,
+            point15, point15, point16, point17, point18, point19, point20, point21];
+        var polyline = L.polyline(
+            latlngs, { color: 'red' }
+        )
+            .addTo(map)
+            .bindPopup('Avda. Juan Carlos I');
+        L.control.scale().addTo(map);
+    </script>
+</body>
+
+</html>
